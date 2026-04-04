@@ -1,33 +1,96 @@
 name: unique_theme_launcher
-description: A custom theme launcher with auto-detection.
+description: >
+  Le premier launcher qui te connaît avant que tu ne parles.
+  Un téléphone, une personne, une signature unique : installez et laissez la magie opérer.
 version: 1.0.0+1
+homepage: https://github.com/smartsniper31/unique-theme-launcher
+repository: https://github.com/smartsniper31/unique-theme-launcher
+issue_tracker: https://github.com/smartsniper31/unique-theme-launcher/issues
+documentation: https://github.com/smartsniper31/unique-theme-launcher/blob/main/README.md
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  hive_flutter: ^1.1.0
-  json_annotation: ^4.8.1
-  google_sign_in: ^6.1.0
-  contacts_service: ^0.6.3
-  telephony: ^0.2.0
-  device_info_plus: ^9.0.2
-  battery_plus: ^5.0.1
-  network_info_plus: ^5.0.1
-  android_id: ^0.3.0
-  crypto: ^3.0.3
-  provider: ^6.0.5
-  permission_handler: ^11.0.0
-  flutter_native_splash: ^2.3.0
-  path_provider: ^2.1.5
+
+  # =========================================================================
+  # State Management
+  # =========================================================================
+  provider: ^6.1.5                      # State management, no_deps: true
+
+  # =========================================================================
+  # Data & Storage
+  # =========================================================================
+  hive_flutter: ^1.1.0                  # Local storage, encrypted
+  path_provider: ^2.1.5                 # System paths (documents, app cache)
+  json_annotation: ^4.8.1               # JSON serialization annotations
+
+  # =========================================================================
+  # User Detection & Device Info
+  # =========================================================================
+  google_sign_in: ^6.1.0                # Google Account detection
+  contacts_service: ^0.6.3              # Read device contacts
+  telephony: ^0.2.0                     # Read SMS messages
+  device_info_plus: ^9.0.2              # Device info (model, IMEI, brand)
+  battery_plus: ^5.0.1                  # Battery level & status real-time
+  network_info_plus: ^5.0.1             # WiFi & network info
+  android_id: ^0.3.0                    # Android unique device ID
+
+  # =========================================================================
+  # Security & Cryptography
+  # =========================================================================
+  crypto: ^3.0.3                        # SHA256, MD5 hashing
+
+  # =========================================================================
+  # Permissions
+  # =========================================================================
+  permission_handler: ^11.0.0           # Runtime permissions management
+
+  # =========================================================================
+  # UI & Splash Screen
+  # =========================================================================
+  flutter_native_splash: ^2.3.0         # Native splash screen
+  
+  # =========================================================================
+  # Logging & Debugging (Optional but recommended)
+  # =========================================================================
+  # logger: ^2.1.0                      # Uncomment for advanced logging
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.4.6
-  json_serializable: ^6.7.1
+  flutter_lints: ^2.0.0                 # Linting rules
+
+  # =========================================================================
+  # Code Generation
+  # =========================================================================
+  build_runner: ^2.4.6                  # Code generation runner
+  json_serializable: ^6.7.1             # Generate fromJson/toJson methods
+
+  # =========================================================================
+  # Testing
+  # =========================================================================
+  # mockito: ^5.4.0                     # Uncomment for mocking in tests
+
+flutter:
+  uses-material-design: true
+
+  # =========================================================================
+  # Assets (if any images/fonts are added)
+  # =========================================================================
+  # assets:
+  #   - assets/images/
+  #   - assets/data/
+  #
+  # fonts:
+  #   - family: Roboto
+  #     fonts:
+  #       - asset: assets/fonts/Roboto-Regular.ttf
+  #       - asset: assets/fonts/Roboto-Bold.ttf
+  #         weight: 700
 
 flutter:
   uses-material-design: true

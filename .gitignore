@@ -1,8 +1,203 @@
-node_modules/
+# ============================================================================
+# Flutter & Dart
+# ============================================================================
+.dart_tool/
+.flutter-plugins-dependencies
+.packages
+*.lock
+pubspec.lock
+pubspec_overrides.yaml
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.config.dart
+*.chopper.dart
+*.gr.dart
+*.gql.dart
+*.graphql.dart
+
+# Build & Compilation
 build/
+.build/
 dist/
+.pub/
+.pub-cache/
 coverage/
+
+# ============================================================================
+# Mobile Platforms
+# ============================================================================
+
+# Android
+android/.gradle
+android/.idea
+android/local.properties
+android/app/debug
+android/app/release
+android/app/profile
+android/app/outputs
+android/app/*.apk
+android/app/*.aab
+android/app/*-release-key.jks
+android/key.properties
+.gradle/
+*.keystore
+!android/.gitkeep
+
+# iOS (future)
+ios/
+ios/.symlinks/
+ios/.generated/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/.CocoaPods/
+
+# macOS (future)
+macos/
+
+# Windows (future)
+windows/
+
+# Linux (future)
+linux/
+
+# Web
+web/canvaskit/
+web/.dart_tool/
+web/*.js
+web/*.js.map
+
+# ============================================================================
+# IDE & Editor
+# ============================================================================
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
 .DS_Store
-*.log
-.env*
+.AppleDouble
+.LSOverride
+*.sublime-workspace
+*.sublime-project
+.IntelliJIdea*/
+!.vscode/extensions.json
+!.idea/inspectionProfiles
+
+# ============================================================================
+# Environment & Configuration
+# ============================================================================
+.env
+.env.local
+.env.*.local
+.env.*.example
+.env.production.local
 !.env.example
+
+# ============================================================================
+# OS & System
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.tmp
+*.temp
+.fuse_hidden*
+
+# ============================================================================
+# Logs & Debugging
+# ============================================================================
+*.log
+*.logs
+npm-debug.log*
+debug.log*
+lerna-debug.log*
+npm-err.log*
+node_modules/
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+*.pack
+
+# ============================================================================
+# Dependencies & Packages
+# ============================================================================
+node_modules/
+.pnp
+.pnp.js
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+Podfile.lock
+
+# ============================================================================
+# Test & Coverage
+# ============================================================================
+coverage/
+.coverage
+.nyc_output
+*.lcov
+lcov-report/
+test-results/
+**/*.xml
+
+# ============================================================================
+# Temporary & Editor Files
+# ============================================================================
+*.swp
+*.swo
+*.swn
+*~
+*.bak
+*.tmp
+*.temp
+*.orig
+.tmlanguage.cache
+.tmSessionWindow
+
+# ============================================================================
+# Secrets & Sensitive Data
+# ============================================================================
+*.key
+*.pem
+*.pfx
+*.p12
+*.jks
+**/secrets/**
+!**/secrets/.gitkeep
+.credentials
+credentials.json
+token.json
+
+# ============================================================================
+# Build Artifacts
+# ============================================================================
+*.class
+*.jar
+*.exe
+*.o
+*.so
+*.dylib
+*.dll
+.o
+.a
+.lib
+
+# ============================================================================
+# Miscellaneous
+# ============================================================================
+.versionrc
+.releaserc
+.npmrc
+.yarnrc
+.prettierignore
+*.patch
+*.diff
+TRAVAIL_FAIT.md.bak

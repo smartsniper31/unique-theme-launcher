@@ -1,0 +1,40 @@
+version: 2
+updates:
+  # Enable Dependabot for Pub packages
+  - package-ecosystem: "pub"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "smartsniper31"
+    labels:
+      - "type: dependencies"
+      - "dependencies"
+    assignees:
+      - "smartsniper31"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    versioning-strategy: "increase-if-necessary"
+    allow:
+      - dependency-type: "production"
+      - dependency-type: "development"
+
+  # Enable Dependabot for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "smartsniper31"
+    labels:
+      - "type: ci"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
