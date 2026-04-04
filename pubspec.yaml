@@ -1,0 +1,35 @@
+name: unique_theme_launcher
+description: A custom theme launcher with auto-detection.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  hive_flutter: ^1.1.0
+  json_annotation: ^4.8.1
+  google_sign_in: ^6.1.0
+  contacts_service: ^0.6.3
+  telephony: ^0.2.0
+  device_info_plus: ^9.0.2
+  battery_plus: ^5.0.1
+  network_info_plus: ^5.0.1
+  android_id: ^0.3.0
+  crypto: ^3.0.3
+  provider: ^6.0.5
+  permission_handler: ^11.0.0
+  flutter_native_splash: ^2.3.0
+  path_provider: ^2.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/splash.png

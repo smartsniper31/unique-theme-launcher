@@ -1,0 +1,5 @@
+{
+  "name": "Unique Theme Launcher",
+  "description": "A custom theme launcher that auto-detects user identity and hardware to create a unique signature and dynamic visual rules.",
+  "requestFramePermissions": ["contacts", "sms", "phone", "location"]
+}
