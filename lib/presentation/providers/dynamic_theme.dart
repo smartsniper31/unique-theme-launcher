@@ -6,13 +6,17 @@ import '../../../data/models/visual_rules.dart';
 import '../../../data/models/custom_units.dart';
 import '../../../core/utils/color_utils.dart';
 import '../../../domain/entities/living_messages.dart';
+import '../../data/storage/user_storage.dart';
 
 class DynamicTheme extends ChangeNotifier {
   final UserProfile profile;
+  final UserStorage _storage;
+  late UserProfile _profile;
   double _currentBatteryLevel = 0.0;
   StreamSubscription<int>? _batterySubscription;
 
-  DynamicTheme(this.profile) {
+  DynamicTheme(this.profile, this._storage) {
+    _profile = profile;
     _currentBatteryLevel = profile.initialBatteryLevel;
     _initBatteryListener();
   }
@@ -51,7 +55,22 @@ class DynamicTheme extends ChangeNotifier {
   }
 
   void updateBatteryLevel(double level) {
-    _currentBatteryLevel = level;
+
+  // ✨ MÉTHODE MAGIQUE: Marquer le bienvenue comme vu et persister
+  UserProfile get profile => _profile;
+  
+  double get currentBatteryLevel => _currentBatteryLevel;
+
+  Future<void> markWelcomeAsSeen() async {
+    // Créer un nouveau profil avec le flag hasSeenWelcome = true
+    _profile = _profile.copyWithWelcomeSeen();
+    
+    // Persister le changement dans le storage
+    await _storage.saveProfile(_profile);
+    
+    // Notifier les listeners (UI) du changement
+    notifyListeners();
+      _currentBatteryLevel = level;
     notifyListeners();
   }
 }

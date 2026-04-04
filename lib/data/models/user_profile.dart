@@ -11,6 +11,11 @@ class UserProfile {
   final DateTime installTimestamp;
   final double initialBatteryLevel;
   final String wifiAtInstall;
+  // ✨ NOUVEAU CHAMP - Flag pour première visite
+  /// Indique si l'utilisateur a vu l'écran de bienvenue
+  /// Par défaut: false (premier lancement)
+  /// Devient: true après première visite
+  final bool hasSeenWelcome;
 
   UserProfile({
     required this.identity,
@@ -20,6 +25,7 @@ class UserProfile {
     required this.installTimestamp,
     required this.initialBatteryLevel,
     required this.wifiAtInstall,
+    this.hasSeenWelcome = false,
   });
 
   factory UserProfile.fallback() {
@@ -31,6 +37,7 @@ class UserProfile {
       installTimestamp: DateTime.now(),
       initialBatteryLevel: 0.5,
       wifiAtInstall: "unknown",
+      hasSeenWelcome: false,
     );
   }
 
@@ -41,6 +48,7 @@ class UserProfile {
     visualRules: VisualRules.fromJson(json['visualRules']),
     installTimestamp: DateTime.parse(json['installTimestamp']),
     initialBatteryLevel: json['initialBatteryLevel'],
+    hasSeenWelcome: json['hasSeenWelcome'] ?? false,
     wifiAtInstall: json['wifiAtInstall'],
   );
 
@@ -51,6 +59,21 @@ class UserProfile {
     'visualRules': visualRules.toJson(),
     'installTimestamp': installTimestamp.toIso8601String(),
     'initialBatteryLevel': initialBatteryLevel,
-    'wifiAtInstall': wifiAtInstall,
+    'hasSeenWelcome': hasSeenWelcome,
+  };
+
+  /// Crée une copie du profil avec hasSeenWelcome = true
+  UserProfile copyWithWelcomeSeen() {
+    return UserProfile(
+      identity: identity,
+      hardware: hardware,
+      units: units,
+      visualRules: visualRules,
+      installTimestamp: installTimestamp,
+      initialBatteryLevel: initialBatteryLevel,
+      wifiAtInstall: wifiAtInstall,
+      hasSeenWelcome: true,
+    );
+  }'wifiAtInstall': wifiAtInstall,
   };
 }

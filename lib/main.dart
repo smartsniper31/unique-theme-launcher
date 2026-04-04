@@ -10,6 +10,7 @@ import 'data/sources/battery_detector.dart';
 import 'data/sources/wifi_detector.dart';
 import 'presentation/providers/dynamic_theme.dart';
 import 'presentation/screens/home_screen.dart';
+import 'presentation/screens/welcome_screen.dart';
 import 'core/utils/permissions_helper.dart';
 
 void main() async {
@@ -50,14 +51,19 @@ void main() async {
 
   runApp(
     ChangeNotifierProvider(
-      create: (_) => DynamicTheme(profile!),
-      child: const DynamicThemeApp(),
+      create: (_) => DynamicTheme(profile!, storage),
+      child: DynamicThemeApp(profile: profile!),
     ),
   );
 }
 
 class DynamicThemeApp extends StatelessWidget {
-  const DynamicThemeApp({super.key});
+  final UserProfile profile;
+
+  const DynamicThemeApp({
+    super.key,
+    required this.profile,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +74,24 @@ class DynamicThemeApp extends StatelessWidget {
         useMaterial3: true,
         brightness: Brightness.light,
       ),
-      home: const HomeScreen(),
+      // 🎬 LOGIQUE DE ROUTING - C'EST ICI LA MAGIE
+      home: Consumer<DynamicTheme>(
+        builder: (context, themeProvider, _) {
+          // Vérifier si l'utilisateur a vu l'écran de bienvenue
+          if (!themeProvider.profile.hasSeenWelcome) {
+            // ✨ Premier lancement: afficher WelcomeScreen
+            return WelcomeScreen(
+              userName: themeProvider.profile.identity.name,
+            );
+          }
+
+          // Lancements ultérieurs: afficher HomeScreen
+          return const HomeScreen();
+        },
+      ),
+      routes: {
+        '/home': (context) => const HomeScreen(),
+      },
     );
   }
 }
