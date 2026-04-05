@@ -9,6 +9,7 @@ import 'data/sources/device_detector.dart';
 import 'data/sources/battery_detector.dart';
 import 'data/sources/wifi_detector.dart';
 import 'presentation/providers/dynamic_theme.dart';
+import 'presentation/providers/living_name_provider.dart';
 import 'presentation/screens/home_screen.dart';
 import 'presentation/screens/welcome_screen.dart';
 import 'core/utils/permissions_helper.dart';
@@ -50,8 +51,15 @@ void main() async {
   FlutterNativeSplash.remove();
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => DynamicTheme(profile!, storage),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => DynamicTheme(profile!, storage),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LivingNameProvider(),
+        ),
+      ],
       child: DynamicThemeApp(profile: profile!),
     ),
   );

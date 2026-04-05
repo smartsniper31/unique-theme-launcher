@@ -206,6 +206,12 @@
       "languageVersion": "3.8"
     },
     {
+      "name": "flutter_lints",
+      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "flutter_native_splash",
       "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.4.7",
       "packageUri": "lib/",
@@ -348,6 +354,12 @@
       "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "lints",
+      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "logging",

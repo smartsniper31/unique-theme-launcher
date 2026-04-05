@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/dynamic_theme.dart';
+import '../providers/living_name_provider.dart';
 import '../widgets/battery_indicator.dart';
 import '../widgets/time_display.dart';
 import '../widgets/greeting_card.dart';
+import '../widgets/living_name.dart';
+import '../../core/constants/app_constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,11 +14,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<DynamicTheme>(context);
+    final livingNameProvider = Provider.of<LivingNameProvider>(context);
     
     return Scaffold(
       backgroundColor: theme.primaryColor.withOpacity(0.05),
       appBar: AppBar(
-        title: Text(AppConstants.appName, style: TextStyle(color: Colors.white, fontSize: theme.fontSize)),
+        title: LivingName(
+          name: theme.userName,
+          color: Colors.white,
+          fontSize: theme.fontSize,
+          padding: const EdgeInsets.symmetric(vertical: 8),
+        ),
         backgroundColor: theme.primaryColor,
         elevation: 0,
         centerTitle: true,
