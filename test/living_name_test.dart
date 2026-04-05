@@ -5,7 +5,7 @@ import 'package:unique_theme_launcher/presentation/widgets/name_animations.dart'
 void main() {
   // Initialize Flutter binding for tests
   TestWidgetsFlutterBinding.ensureInitialized();
-  
+
   group('LivingNameProvider', () {
     late LivingNameProvider provider;
 
