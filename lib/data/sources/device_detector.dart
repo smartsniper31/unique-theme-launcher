@@ -9,11 +9,12 @@ class DeviceDetector {
     final deviceInfo = DeviceInfoPlugin();
     final androidInfo = await deviceInfo.androidInfo;
     final androidId = await const AndroidId().getId();
-    
+
     final idHash = _hashId(androidId ?? "unknown");
-    
+
     final shortModel = androidInfo.model.split(' ').last.toUpperCase();
-    final signature = "${userName.substring(0,3).toUpperCase()}-$shortModel-${androidInfo.version.sdkInt}-${idHash.substring(0,4)}";
+    final signature =
+        "${userName.substring(0, 3).toUpperCase()}-$shortModel-${androidInfo.version.sdkInt}-${idHash.substring(0, 4)}";
 
     return HardwareSignature(
       model: androidInfo.model,

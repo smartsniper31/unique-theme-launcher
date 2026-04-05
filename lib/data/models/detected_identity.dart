@@ -11,15 +11,17 @@ class DetectedIdentity {
     required this.confidenceScore,
   });
 
-  factory DetectedIdentity.fromJson(Map<String, dynamic> json) => DetectedIdentity(
-    name: json['name'],
-    source: NameSource.values.firstWhere((e) => e.toString() == json['source']),
-    confidenceScore: json['confidenceScore'],
-  );
+  factory DetectedIdentity.fromJson(Map<String, dynamic> json) =>
+      DetectedIdentity(
+        name: json['name'],
+        source:
+            NameSource.values.firstWhere((e) => e.toString() == json['source']),
+        confidenceScore: json['confidenceScore'],
+      );
 
   Map<String, dynamic> toJson() => {
-    'name': name,
-    'source': source.toString(),
-    'confidenceScore': confidenceScore,
-  };
+        'name': name,
+        'source': source.toString(),
+        'confidenceScore': confidenceScore,
+      };
 }

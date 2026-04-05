@@ -3,7 +3,8 @@ class LivingMessages {
   final String afternoon;
   final String evening;
 
-  LivingMessages({required this.morning, required this.afternoon, required this.evening});
+  LivingMessages(
+      {required this.morning, required this.afternoon, required this.evening});
 
   String getMessage() {
     final hour = DateTime.now().hour;

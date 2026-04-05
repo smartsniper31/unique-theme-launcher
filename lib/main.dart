@@ -24,7 +24,7 @@ void main() async {
   try {
     if (!(await storage.exists())) {
       final results = await PermissionsHelper.requestAllWithRetry();
-      
+
       if (PermissionsHelper.hasEssentialPermissions(results)) {
         final installer = InstallThemeUseCase(
           nameDetector: NameDetector(),
@@ -60,7 +60,7 @@ void main() async {
           create: (_) => LivingNameProvider(),
         ),
       ],
-      child: DynamicThemeApp(profile: profile!),
+      child: DynamicThemeApp(profile: profile),
     ),
   );
 }

@@ -35,24 +35,25 @@ class VisualRules {
   }
 
   factory VisualRules.fromJson(Map<String, dynamic> json) => VisualRules(
-    cornerRadius: json['cornerRadius'],
-    iconDensity: IconDensity.values.firstWhere((e) => e.toString() == json['iconDensity']),
-    gridColumns: json['gridColumns'],
-    dominantColor: json['dominantColor'],
-    fractalSeed: json['fractalSeed'],
-    iconSize: json['iconSize'],
-    fontSize: json['fontSize'],
-    useRoundedIcons: json['useRoundedIcons'],
-  );
+        cornerRadius: json['cornerRadius'],
+        iconDensity: IconDensity.values
+            .firstWhere((e) => e.toString() == json['iconDensity']),
+        gridColumns: json['gridColumns'],
+        dominantColor: json['dominantColor'],
+        fractalSeed: json['fractalSeed'],
+        iconSize: json['iconSize'],
+        fontSize: json['fontSize'],
+        useRoundedIcons: json['useRoundedIcons'],
+      );
 
   Map<String, dynamic> toJson() => {
-    'cornerRadius': cornerRadius,
-    'iconDensity': iconDensity.toString(),
-    'gridColumns': gridColumns,
-    'dominantColor': dominantColor,
-    'fractalSeed': fractalSeed,
-    'iconSize': iconSize,
-    'fontSize': fontSize,
-    'useRoundedIcons': useRoundedIcons,
-  };
+        'cornerRadius': cornerRadius,
+        'iconDensity': iconDensity.toString(),
+        'gridColumns': gridColumns,
+        'dominantColor': dominantColor,
+        'fractalSeed': fractalSeed,
+        'iconSize': iconSize,
+        'fontSize': fontSize,
+        'useRoundedIcons': useRoundedIcons,
+      };
 }

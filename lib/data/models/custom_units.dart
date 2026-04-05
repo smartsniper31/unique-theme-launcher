@@ -1,9 +1,12 @@
 class CustomUnits {
   final String unitName;
-  final double timeMultiplier;   // 1 unité = X heures
+  final double timeMultiplier; // 1 unité = X heures
   final double batteryMultiplier; // 1 unité = 1%
 
-  CustomUnits({required this.unitName, required this.timeMultiplier, required this.batteryMultiplier});
+  CustomUnits(
+      {required this.unitName,
+      required this.timeMultiplier,
+      required this.batteryMultiplier});
 
   factory CustomUnits.fallback() {
     return CustomUnits(
@@ -25,14 +28,14 @@ class CustomUnits {
   }
 
   factory CustomUnits.fromJson(Map<String, dynamic> json) => CustomUnits(
-    unitName: json['unitName'],
-    timeMultiplier: json['timeMultiplier'],
-    batteryMultiplier: json['batteryMultiplier'],
-  );
+        unitName: json['unitName'],
+        timeMultiplier: json['timeMultiplier'],
+        batteryMultiplier: json['batteryMultiplier'],
+      );
 
   Map<String, dynamic> toJson() => {
-    'unitName': unitName,
-    'timeMultiplier': timeMultiplier,
-    'batteryMultiplier': batteryMultiplier,
-  };
+        'unitName': unitName,
+        'timeMultiplier': timeMultiplier,
+        'batteryMultiplier': batteryMultiplier,
+      };
 }

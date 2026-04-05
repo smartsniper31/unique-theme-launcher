@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 extension StringExtensions on String {
   int get vowelCount {
     return RegExp(r'[aeiouyAEIOUY]').allMatches(this).length;
@@ -14,6 +16,6 @@ extension StringExtensions on String {
 
   String get toUnitFormat {
     if (isEmpty) return 'UNK';
-    return substring(0, min(3, length)).toUpperCase();
+    return substring(0, math.min(3, length)).toUpperCase();
   }
 }

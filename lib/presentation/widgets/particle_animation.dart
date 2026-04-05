@@ -80,8 +80,7 @@ class _ParticleAnimationWidgetState extends State<ParticleAnimationWidget>
                         color: _getParticleColor(i),
                         boxShadow: [
                           BoxShadow(
-                            color: _getParticleColor(i)
-                                .withOpacity(0.5),
+                            color: _getParticleColor(i).withValues(alpha: 0.5),
                             blurRadius: 8,
                           ),
                         ],

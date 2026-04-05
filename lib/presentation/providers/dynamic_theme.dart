@@ -13,7 +13,7 @@ class DynamicTheme extends ChangeNotifier {
   final UserStorage _storage;
   late UserProfile _profile;
   double _currentBatteryLevel = 0.0;
-  StreamSubscription<int>? _batterySubscription;
+  StreamSubscription<BatteryState>? _batterySubscription;
 
   DynamicTheme(this.profile, this._storage) {
     _profile = profile;
@@ -29,13 +29,15 @@ class DynamicTheme extends ChangeNotifier {
 
   void _initBatteryListener() {
     final battery = Battery();
-    _batterySubscription = battery.onBatteryStateChanged.listen((BatteryState state) async {
+    _batterySubscription =
+        battery.onBatteryStateChanged.listen((BatteryState state) async {
       final level = await battery.batteryLevel;
       updateBatteryLevel(level / 100.0);
     });
   }
 
-  Color get primaryColor => ColorUtils.parseHexColor(profile.visualRules.dominantColor);
+  Color get primaryColor =>
+      ColorUtils.parseHexColor(profile.visualRules.dominantColor);
   double get cornerRadius => profile.visualRules.cornerRadius;
   double get iconSize => profile.visualRules.iconSize;
   double get fontSize => profile.visualRules.fontSize;
@@ -55,22 +57,20 @@ class DynamicTheme extends ChangeNotifier {
   }
 
   void updateBatteryLevel(double level) {
+    _currentBatteryLevel = level;
+    notifyListeners();
+  }
 
-  // ✨ MÉTHODE MAGIQUE: Marquer le bienvenue comme vu et persister
-  UserProfile get profile => _profile;
-  
   double get currentBatteryLevel => _currentBatteryLevel;
 
   Future<void> markWelcomeAsSeen() async {
     // Créer un nouveau profil avec le flag hasSeenWelcome = true
     _profile = _profile.copyWithWelcomeSeen();
-    
+
     // Persister le changement dans le storage
     await _storage.saveProfile(_profile);
-    
+
     // Notifier les listeners (UI) du changement
-    notifyListeners();
-      _currentBatteryLevel = level;
     notifyListeners();
   }
 }

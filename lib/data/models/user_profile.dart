@@ -30,7 +30,8 @@ class UserProfile {
 
   factory UserProfile.fallback() {
     return UserProfile(
-      identity: DetectedIdentity(name: "Toi", source: NameSource.fallback, confidenceScore: 0.1),
+      identity: DetectedIdentity(
+          name: "Toi", source: NameSource.fallback, confidenceScore: 0.1),
       hardware: HardwareSignature.fallback(),
       units: CustomUnits.fallback(),
       visualRules: VisualRules.fallback(),
@@ -42,25 +43,15 @@ class UserProfile {
   }
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
-    identity: DetectedIdentity.fromJson(json['identity']),
-    hardware: HardwareSignature.fromJson(json['hardware']),
-    units: CustomUnits.fromJson(json['units']),
-    visualRules: VisualRules.fromJson(json['visualRules']),
-    installTimestamp: DateTime.parse(json['installTimestamp']),
-    initialBatteryLevel: json['initialBatteryLevel'],
-    hasSeenWelcome: json['hasSeenWelcome'] ?? false,
-    wifiAtInstall: json['wifiAtInstall'],
-  );
-
-  Map<String, dynamic> toJson() => {
-    'identity': identity.toJson(),
-    'hardware': hardware.toJson(),
-    'units': units.toJson(),
-    'visualRules': visualRules.toJson(),
-    'installTimestamp': installTimestamp.toIso8601String(),
-    'initialBatteryLevel': initialBatteryLevel,
-    'hasSeenWelcome': hasSeenWelcome,
-  };
+        identity: DetectedIdentity.fromJson(json['identity']),
+        hardware: HardwareSignature.fromJson(json['hardware']),
+        units: CustomUnits.fromJson(json['units']),
+        visualRules: VisualRules.fromJson(json['visualRules']),
+        installTimestamp: DateTime.parse(json['installTimestamp']),
+        initialBatteryLevel: json['initialBatteryLevel'],
+        hasSeenWelcome: json['hasSeenWelcome'] ?? false,
+        wifiAtInstall: json['wifiAtInstall'],
+      );
 
   /// Crée une copie du profil avec hasSeenWelcome = true
   UserProfile copyWithWelcomeSeen() {
@@ -74,6 +65,16 @@ class UserProfile {
       wifiAtInstall: wifiAtInstall,
       hasSeenWelcome: true,
     );
-  }'wifiAtInstall': wifiAtInstall,
-  };
+  }
+
+  Map<String, dynamic> toJson() => {
+        'identity': identity.toJson(),
+        'hardware': hardware.toJson(),
+        'units': units.toJson(),
+        'visualRules': visualRules.toJson(),
+        'installTimestamp': installTimestamp.toIso8601String(),
+        'initialBatteryLevel': initialBatteryLevel,
+        'hasSeenWelcome': hasSeenWelcome,
+        'wifiAtInstall': wifiAtInstall,
+      };
 }

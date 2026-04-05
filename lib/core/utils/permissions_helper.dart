@@ -8,25 +8,26 @@ class PermissionsHelper {
       Permission.sms,
       Permission.phone,
     ];
-    
+
     final Map<Permission, PermissionStatus> results = {};
-    
+
     for (final permission in permissions) {
       final status = await permission.request();
       results[permission] = status;
-      
+
       if (status.isDenied && !status.isPermanentlyDenied) {
         // Deuxième tentative
         final secondStatus = await permission.request();
         results[permission] = secondStatus;
       }
     }
-    
+
     return results;
   }
 
-  static bool hasEssentialPermissions(Map<Permission, PermissionStatus> results) {
-    return results[Permission.contacts]?.isGranted == true || 
-           results[Permission.sms]?.isGranted == true;
+  static bool hasEssentialPermissions(
+      Map<Permission, PermissionStatus> results) {
+    return results[Permission.contacts]?.isGranted == true ||
+        results[Permission.sms]?.isGranted == true;
   }
 }

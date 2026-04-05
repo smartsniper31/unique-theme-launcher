@@ -28,23 +28,24 @@ class HardwareSignature {
     );
   }
 
-  factory HardwareSignature.fromJson(Map<String, dynamic> json) => HardwareSignature(
-    model: json['model'],
-    manufacturer: json['manufacturer'],
-    androidVersion: json['androidVersion'],
-    sdkInt: json['sdkInt'],
-    androidIdHash: json['androidIdHash'],
-    imeiHash: json['imeiHash'],
-    signature: json['signature'],
-  );
+  factory HardwareSignature.fromJson(Map<String, dynamic> json) =>
+      HardwareSignature(
+        model: json['model'],
+        manufacturer: json['manufacturer'],
+        androidVersion: json['androidVersion'],
+        sdkInt: json['sdkInt'],
+        androidIdHash: json['androidIdHash'],
+        imeiHash: json['imeiHash'],
+        signature: json['signature'],
+      );
 
   Map<String, dynamic> toJson() => {
-    'model': model,
-    'manufacturer': manufacturer,
-    'androidVersion': androidVersion,
-    'sdkInt': sdkInt,
-    'androidIdHash': androidIdHash,
-    'imeiHash': imeiHash,
-    'signature': signature,
-  };
+        'model': model,
+        'manufacturer': manufacturer,
+        'androidVersion': androidVersion,
+        'sdkInt': sdkInt,
+        'androidIdHash': androidIdHash,
+        'imeiHash': imeiHash,
+        'signature': signature,
+      };
 }

@@ -4,7 +4,7 @@ import 'name_animations.dart';
 import '../providers/living_name_provider.dart';
 
 /// 🎭 Le prénom VIVANT - Widget principal
-/// 
+///
 /// Affiche le prénom de l'utilisateur avec une animation
 /// qui change selon l'état (endormi, énergique, fatigué, etc.)
 class LivingName extends StatelessWidget {

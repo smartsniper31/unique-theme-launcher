@@ -9,26 +9,30 @@ class NameDetector {
 
   Future<DetectedIdentity> detect() async {
     final google = await getFromGoogleAccount();
-    if (google != null) return DetectedIdentity(name: google, source: NameSource.google, confidenceScore: 0.95);
+    if (google != null)
+      return DetectedIdentity(
+          name: google, source: NameSource.google, confidenceScore: 0.95);
 
     final contact = await getFromMyContact();
-    if (contact != null) return DetectedIdentity(name: contact, source: NameSource.contact, confidenceScore: 0.85);
+    if (contact != null)
+      return DetectedIdentity(
+          name: contact, source: NameSource.contact, confidenceScore: 0.85);
 
     final sms = await getFromSms();
-    if (sms != null) return DetectedIdentity(name: sms, source: NameSource.sms, confidenceScore: 0.70);
+    if (sms != null)
+      return DetectedIdentity(
+          name: sms, source: NameSource.sms, confidenceScore: 0.70);
 
-    return DetectedIdentity(name: "Utilisateur", source: NameSource.fallback, confidenceScore: 0.1);
+    return DetectedIdentity(
+        name: "Utilisateur", source: NameSource.fallback, confidenceScore: 0.1);
   }
 
   Future<String?> getFromSms() async {
     try {
       final telephony = Telephony.instance;
-      
-      List<SmsMessage> messages = await telephony.getInboxSms(
-        columns: [SmsColumn.ADDRESS, SmsColumn.BODY],
-        sortOrder: [OrderBy.ID(Order.DESC)],
-        pageSize: 10
-      );
+
+      List<SmsMessage> messages = await telephony
+          .getInboxSms(columns: [SmsColumn.ADDRESS, SmsColumn.BODY]);
 
       for (var msg in messages) {
         final name = _extractNameFromSender(msg.address ?? "");
@@ -52,14 +56,19 @@ class NameDetector {
     try {
       final account = await _googleSignIn.signInSilently();
       return account?.displayName?.split(' ').first;
-    } catch (_) => null;
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<String?> getFromMyContact() async {
     try {
-      Iterable<Contact> contacts = await ContactsService.getContacts(query: "Moi");
+      Iterable<Contact> contacts =
+          await ContactsService.getContacts(query: "Moi");
       if (contacts.isNotEmpty) return contacts.first.givenName;
       return null;
-    } catch (_) => null;
+    } catch (_) {
+      return null;
+    }
   }
 }

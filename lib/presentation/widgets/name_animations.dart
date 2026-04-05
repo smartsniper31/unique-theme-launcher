@@ -3,14 +3,14 @@ import 'dart:math' as math;
 
 /// Enum pour les états du prénom vivant
 enum LivingNameState {
-  asleep,      // 😴 Endormi 22h-6h
-  waking,      // ☀️ Réveil 6h-10h (premier déverrouillage)
-  energetic,   // ⚡ Énergique batterie > 50% + matin
-  tired,       // 😫 Fatigué usage > 2h
-  happy,       // 🎉 Heureux (anniversaire)
-  sad,         // 😢 Triste batterie < 15%
-  hungry,      // 🔋 Affamé batterie 15-20%
-  playful,     // 😏 Joueur soirée 18h-22h
+  asleep, // 😴 Endormi 22h-6h
+  waking, // ☀️ Réveil 6h-10h (premier déverrouillage)
+  energetic, // ⚡ Énergique batterie > 50% + matin
+  tired, // 😫 Fatigué usage > 2h
+  happy, // 🎉 Heureux (anniversaire)
+  sad, // 😢 Triste batterie < 15%
+  hungry, // 🔋 Affamé batterie 15-20%
+  playful, // 😏 Joueur soirée 18h-22h
 }
 
 /// 🎭 Widget d'animation du prénom selon l'état
@@ -110,7 +110,7 @@ class _AsleepAnimationWidgetState extends State<_AsleepAnimationWidget>
                   style: TextStyle(
                     fontSize: widget.fontSize,
                     fontWeight: FontWeight.bold,
-                    color: widget.color.withOpacity(0.7),
+                    color: widget.color.withValues(alpha: 0.7),
                     letterSpacing: -1.0,
                   ),
                 ),
@@ -225,7 +225,7 @@ class _WakingAnimationWidgetState extends State<_WakingAnimationWidget>
                   shaderCallback: (bounds) {
                     return LinearGradient(
                       colors: [
-                        widget.color.withOpacity(0.5),
+                        widget.color.withValues(alpha: 0.5),
                         widget.color,
                       ],
                       begin: Alignment.topLeft,
@@ -350,7 +350,7 @@ class _EnergeticAnimationWidgetState extends State<_EnergeticAnimationWidget>
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: widget.color.withOpacity(0.6),
+                      color: widget.color.withValues(alpha: 0.6),
                       blurRadius: _glowAnimation.value,
                       spreadRadius: _glowAnimation.value * 0.5,
                     ),
@@ -460,7 +460,7 @@ class _TiredAnimationWidgetState extends State<_TiredAnimationWidget>
                   style: TextStyle(
                     fontSize: widget.fontSize,
                     fontWeight: FontWeight.bold,
-                    color: widget.color.withOpacity(0.8),
+                    color: widget.color.withValues(alpha: 0.8),
                     letterSpacing: -1.0,
                   ),
                 ),
@@ -670,7 +670,7 @@ class _SadAnimationWidgetState extends State<_SadAnimationWidget>
                   style: TextStyle(
                     fontSize: widget.fontSize,
                     fontWeight: FontWeight.bold,
-                    color: widget.color.withOpacity(0.6),
+                    color: widget.color.withValues(alpha: 0.6),
                     letterSpacing: -1.0,
                   ),
                 ),

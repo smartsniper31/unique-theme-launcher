@@ -3,13 +3,12 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 import 'dart:math';
 
-import 'package:unique_theme_launcher/data/models/user_profile.dart';
 import 'package:unique_theme_launcher/presentation/providers/dynamic_theme.dart';
 import 'package:unique_theme_launcher/presentation/screens/home_screen.dart';
 import 'package:unique_theme_launcher/presentation/widgets/particle_animation.dart';
 
 /// 🎬 Écran de Bienvenue avec Animation Magique
-/// 
+///
 /// Affiche UNIQUEMENT à la première installation.
 /// Animation lettre-par-lettre du prénom avec effets visuels.
 class WelcomeScreen extends StatefulWidget {
@@ -105,25 +104,25 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   /// Animation lettre-par-lettre avec timing dynamique
   Future<void> _animateTyping() async {
     final duration = _calculateTypingDuration();
-    
-    return Future<void>((resolve) {
-      _typingTimer = Timer.periodic(
-        Duration(milliseconds: duration),
-        (timer) {
-          if (_currentIndex < widget.userName.length) {
-            setState(() {
-              _displayedName =
-                  widget.userName.substring(0, _currentIndex + 1);
-              _currentIndex++;
-            });
-          } else {
-            timer.cancel();
-            _typingTimer = null;
-            resolve();
-          }
-        },
-      );
-    });
+    final completer = Completer<void>();
+
+    _typingTimer = Timer.periodic(
+      Duration(milliseconds: duration),
+      (timer) {
+        if (_currentIndex < widget.userName.length) {
+          setState(() {
+            _displayedName = widget.userName.substring(0, _currentIndex + 1);
+            _currentIndex++;
+          });
+        } else {
+          timer.cancel();
+          _typingTimer = null;
+          completer.complete();
+        }
+      },
+    );
+
+    return completer.future;
   }
 
   /// Calcule la durée entre chaque lettre
@@ -142,8 +141,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     try {
       // Récupérer le provider et marquer la bienvenue comme vue
       if (mounted) {
-        final themeProvider =
-            context.read<DynamicTheme>();
+        final themeProvider = context.read<DynamicTheme>();
         await themeProvider.markWelcomeAsSeen();
       }
 
@@ -298,7 +296,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               width: 2,
             ),
             borderRadius: BorderRadius.circular(16),
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withValues(alpha: 0.7),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -326,7 +324,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           fontSize: isMobile ? 48 : 72,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue.shade700,
-                          animation: _scaleController,
                         ),
                       );
                     },
@@ -412,7 +409,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             width: 1,
           ),
           borderRadius: BorderRadius.circular(20),
-          color: Colors.white.withOpacity(0.5),
+          color: Colors.white.withValues(alpha: 0.5),
         ),
         child: Text(
           'Appuyer pour passer',

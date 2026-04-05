@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/dynamic_theme.dart';
-import '../providers/living_name_provider.dart';
 import '../widgets/battery_indicator.dart';
 import '../widgets/time_display.dart';
 import '../widgets/greeting_card.dart';
 import '../widgets/living_name.dart';
-import '../../core/constants/app_constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,10 +12,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<DynamicTheme>(context);
-    final livingNameProvider = Provider.of<LivingNameProvider>(context);
-    
+
     return Scaffold(
-      backgroundColor: theme.primaryColor.withOpacity(0.05),
+      backgroundColor: theme.primaryColor.withValues(alpha: 0.05),
       appBar: AppBar(
         title: LivingName(
           name: theme.userName,
@@ -85,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Container(
                       decoration: BoxDecoration(
-                        color: theme.primaryColor.withOpacity(0.1),
+                        color: theme.primaryColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(theme.cornerRadius),
                       ),
                       child: Icon(

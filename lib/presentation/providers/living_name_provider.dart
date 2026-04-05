@@ -4,7 +4,7 @@ import 'dart:async';
 import '../widgets/name_animations.dart';
 
 /// 🎭 Provider pour gérer l'état du prénom vivant
-/// 
+///
 /// Responsabilités:
 /// - Écouter l'heure (DateTime)
 /// - Écouter la batterie (Battery)
@@ -107,7 +107,7 @@ class LivingNameProvider extends ChangeNotifier {
   }
 
   /// 🧠 LOGIQUE DE CALCUL D'ÉTAT
-  /// 
+  ///
   /// Implémente l'algorithme de décision pour chaque état
   /// Les conditions sont vérifiées dans l'ordre de priorité:
   /// 1. Anniversaire → HAPPY
