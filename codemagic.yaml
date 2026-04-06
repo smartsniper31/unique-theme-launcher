@@ -6,16 +6,14 @@ workflows:
     
     environment:
       flutter: stable
-      xcode: latest
       java: 11
-      android_sdk: 34
       
     triggering:
       events:
         - push
         - pull_request
       branch:
-        include_patterns:
+        include:
           - main
           - develop
           - release/*
