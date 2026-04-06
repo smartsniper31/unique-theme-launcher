@@ -1,16 +1,12 @@
 workflows:
   build-android:
     name: Build Android APK - Unique Theme Launcher
-    instance_type: linux
-    max_number_of_parallel_deliveries: 1
-    
+instance_type: linux_vm
+
     environment:
       flutter: stable
     
-    caching:
-      cache_paths:
-        - pub-cache
-        - $HOME/.gradle/caches
+
     
     scripts:
       - name: Get Flutter version
