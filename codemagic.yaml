@@ -1,28 +1,13 @@
 workflows:
   build-android:
-    name: Build Android APK - Unique Theme Launcher
-instance_type: linux_vm
-
+    name: Android APK Unique Theme Launcher
+    instance_type: linux_vm
     environment:
       flutter: stable
-    
-
-    
     scripts:
-      - name: Get Flutter version
-        script: flutter --version
-      
-      - name: Clean previous builds
+      - name: Clean
         script: flutter clean
-      
-      - name: Install dependencies
+      - name: Get dependencies
         script: flutter pub get
-      
-      - name: Generate JSON serialization
-        script: flutter pub run build_runner build --delete-conflicting-outputs
-      
-      - name: Build Android APK
-        script: flutter build apk --release
-    
-    artifacts:
-      - build/app/outputs/flutter-apk/**.apk
+      - name: Build APK
+        script
