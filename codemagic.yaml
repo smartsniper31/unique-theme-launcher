@@ -10,4 +10,4 @@ workflows:
       - name: Get dependencies
         script: flutter pub get
       - name: Build APK
-        script
+        script: flutter build apk --release
