@@ -122,7 +122,7 @@ workflows:
 # =====================================================================
   build-android-apk-optimized:
     name: 🚀 Android APK Build - Optimized
-    instance_type: mac_mini
+    instance_type: linux
     max_build_duration: 45
     
     environment:
