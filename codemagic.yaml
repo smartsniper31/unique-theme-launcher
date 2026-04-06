@@ -1,13 +1,184 @@
 workflows:
-  build-android:
-    name: Android APK Unique Theme Launcher
-    instance_type: linux_vm
+  build-android-apk:
+    name: 🚀 Unique Theme Launcher - Android APK Build
+    instance_type: linux_x2
+    max_build_duration: 60
+    
     environment:
       flutter: stable
+      xcode: latest
+      java: 11
+      android_sdk: 34
+      
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch:
+        include_patterns:
+          - main
+          - develop
+          - release/*
+      
     scripts:
-      - name: Clean
-        script: flutter clean
-      - name: Get dependencies
-        script: flutter pub get
-      - name: Build APK
-        script: flutter build apk --release
+      # =====================================================================
+      # 1. PRÉPARATION - Nettoyage et Configuration
+      # =====================================================================
+      - name: 🧹 Clean Project
+        script: |
+          flutter clean
+          rm -rf build/
+          echo "✓ Project cleaned successfully"
+      
+      # =====================================================================
+      # 2. DÉPENDANCES - Installation et Validation
+      # =====================================================================
+      - name: 📦 Get Dependencies
+        script: |
+          flutter pub get
+          flutter pub upgrade
+          echo "✓ Dependencies installed and upgraded"
+      
+      # =====================================================================
+      # 3. ANALYSE - Linting et Vérifications
+      # =====================================================================
+      - name: 🔍 Code Analysis
+        script: |
+          flutter analyze
+          echo "✓ Code analysis completed"
+        ignore_failure: true
+      
+      # =====================================================================
+      # 4. GÉNÉRATION DE CODE - Code generation avec build_runner
+      # =====================================================================
+      - name: ⚙️ Generate Code
+        script: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+          echo "✓ Code generation completed"
+        ignore_failure: true
+      
+      # =====================================================================
+      # 5. TESTS - Exécution des tests unitaires
+      # =====================================================================
+      - name: 🧪 Run Tests
+        script: |
+          flutter test --coverage
+          echo "✓ Unit tests completed"
+        ignore_failure: true
+      
+      # =====================================================================
+      # 6. BUILD ANDROID - Construction de l'APK Release
+      # =====================================================================
+      - name: 🏗️ Build APK Release
+        script: |
+          flutter build apk \
+            --release \
+            --verbose \
+            --build-name=1.0.0 \
+            --build-number=1 \
+            --split-per-abi
+          echo "✓ APK build completed successfully"
+      
+      # =====================================================================
+      # 7. BUILD ANDROID - Construction d'AAB (Google Play Format)
+      # =====================================================================
+      - name: 📱 Build AAB for Google Play
+        script: |
+          flutter build appbundle \
+            --release \
+            --verbose \
+            --build-name=1.0.0 \
+            --build-number=1
+          echo "✓ AAB build completed successfully"
+        ignore_failure: true
+      
+      # =====================================================================
+      # 8. VÉRIFICATION - Vérifier que les artefacts existent
+      # =====================================================================
+      - name: ✅ Verify Artifacts
+        script: |
+          echo "Checking for build artifacts..."
+          if [ -f "build/app/outputs/apk/release/app-release.apk" ]; then
+            echo "✓ APK Release found"
+            ls -lh build/app/outputs/apk/release/app-*.apk
+          else
+            echo "⚠️ APK Release not found"
+            find build/app/outputs -name "*.apk" -type f
+          fi
+          
+          if [ -f "build/app/outputs/bundle/release/app-release.aab" ]; then
+            echo "✓ AAB Release found"
+            ls -lh build/app/outputs/bundle/release/app-release.aab
+          else
+            echo "⚠️ AAB Release not found"
+          fi
+          
+          echo "Build artifacts verification completed"
+    
+    # =====================================================================
+    # ARTIFACTS - Fichiers à conserver après le build
+    # =====================================================================
+    artifacts:
+      - build/app/outputs/apk/release/**/*.apk
+      - build/app/outputs/bundle/release/*.aab
+      - build/app/outputs/logs/**
+      - coverage/**
+    
+    # =====================================================================
+    # NOTIFICATIONS - Alertes en cas de succès/erreur
+    # =====================================================================
+    publishing:
+      email:
+        recipients:
+          - $CODEMAGIC_BUILD_EMAIL
+        notify:
+          success: true
+          failure: true
+      
+      # Décommenter pour Slack/Discord si vous avez configuré les webhooks
+      # slack_webhook: $SLACK_WEBHOOK_URL
+      
+      # Décommenter pour Google Play Store
+      # google_play:
+      #   credentials: $ANDROID_KEYSTORE
+      #   track: internal
+      #   submit_as_draft: true
+
+# =====================================================================
+# BUILD SUPPLÉMENTAIRE (OPTIONNEL) - Release optimisée
+# =====================================================================
+  build-android-apk-optimized:
+    name: 🚀 Android APK Build - Optimized
+    instance_type: linux_x2
+    max_build_duration: 45
+    
+    environment:
+      flutter: stable
+      java: 11
+      android_sdk: 34
+    
+    triggering:
+      manual: true  # Déclencher manuellement
+    
+    scripts:
+      - name: Clean and Prepare
+        script: |
+          flutter clean
+          flutter pub get
+      
+      - name: Build APK (Optimized)
+        script: |
+          flutter build apk \
+            --release \
+            --split-per-abi \
+            --obfuscate \
+            --split-debug-info=build/app/outputs/symbols
+      
+      - name: Verify Build
+        script: |
+          ls -lh build/app/outputs/apk/release/
+          echo "Build complete!"
+    
+    artifacts:
+      - build/app/outputs/apk/release/**/*.apk
+      - build/app/outputs/symbols/**
