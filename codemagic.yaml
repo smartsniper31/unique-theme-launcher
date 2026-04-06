@@ -1,7 +1,7 @@
 workflows:
   build-android:
     name: Build Android APK - Unique Theme Launcher
-    instance_type: linux_vm
+    instance_type: linux
     max_number_of_parallel_deliveries: 1
     
     environment:
