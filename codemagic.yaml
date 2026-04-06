@@ -1,7 +1,7 @@
 workflows:
   build-android-apk:
     name: 🚀 Unique Theme Launcher - Android APK Build
-    instance_type: linux_x2
+    instance_type: linux
     max_build_duration: 60
     
     environment:
@@ -122,7 +122,7 @@ workflows:
 # =====================================================================
   build-android-apk-optimized:
     name: 🚀 Android APK Build - Optimized
-    instance_type: linux_x2
+    instance_type: linux
     max_build_duration: 45
     
     environment:
