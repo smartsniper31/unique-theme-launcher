@@ -36,7 +36,7 @@ dependencies:
   device_info_plus: ^10.1.0              # Device information
   battery_plus: ^6.0.0                   # Battery level & status real-time
   network_info_plus: ^5.0.1              # WiFi & network info
-  android_id: ^0.3.0                     # Android unique device ID
+  android_id: ^0.5.1                     # Android unique device ID
   path: ^1.9.0                           # Path manipulation utilities
 
   # =========================================================================
