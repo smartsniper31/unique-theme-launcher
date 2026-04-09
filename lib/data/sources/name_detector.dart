@@ -1,42 +1,16 @@
 import 'dart:async';
-import 'package:telephony/telephony.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:contacts_service/contacts_service.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import '../models/detected_identity.dart';
 
+/// Détecteur pour extraire le nom de l'utilisateur depuis plusieurs sources
 class NameDetector {
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-  Future<DetectedIdentity> detect() async {
-    final google = await getFromGoogleAccount();
-    if (google != null)
-      return DetectedIdentity(
-          name: google, source: NameSource.google, confidenceScore: 0.95);
-
-    final contact = await getFromMyContact();
-    if (contact != null)
-      return DetectedIdentity(
-          name: contact, source: NameSource.contact, confidenceScore: 0.85);
-
-    final sms = await getFromSms();
-    if (sms != null)
-      return DetectedIdentity(
-          name: sms, source: NameSource.sms, confidenceScore: 0.70);
-
-    return DetectedIdentity(
-        name: "Utilisateur", source: NameSource.fallback, confidenceScore: 0.1);
-  }
-
-  Future<String?> getFromSms() async {
+  /// Récupère le nom depuis les contacts
+  Future<String?> getNameFromContacts() async {
     try {
-      final telephony = Telephony.instance;
-
-      List<SmsMessage> messages = await telephony
-          .getInboxSms(columns: [SmsColumn.ADDRESS, SmsColumn.BODY]);
-
-      for (var msg in messages) {
-        final name = _extractNameFromSender(msg.address ?? "");
-        if (name != null) return name;
+      final contacts = await FlutterContacts.getContacts(withProperties: true);
+      if (contacts.isNotEmpty) {
+        return contacts.first.displayName;
       }
       return null;
     } catch (e) {
@@ -44,31 +18,46 @@ class NameDetector {
     }
   }
 
-  String? _extractNameFromSender(String sender) {
-    final regex = RegExp(r'^([A-Za-zÀ-ÿ\s]+)\s*[<\(]?');
-    final match = regex.firstMatch(sender);
-    final found = match?.group(1)?.trim().split(' ').first;
-    if (found != null && RegExp(r'^[0-9+]+$').hasMatch(found)) return null;
-    return found;
-  }
-
-  Future<String?> getFromGoogleAccount() async {
+  /// Récupère le nom depuis l'authentification Google
+  Future<String?> getNameFromGoogle() async {
     try {
-      final account = await _googleSignIn.signInSilently();
-      return account?.displayName?.split(' ').first;
-    } catch (_) {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? account = await googleSignIn.signInSilently();
+      return account?.displayName;
+    } catch (e) {
       return null;
     }
   }
 
-  Future<String?> getFromMyContact() async {
-    try {
-      Iterable<Contact> contacts =
-          await ContactsService.getContacts(query: "Moi");
-      if (contacts.isNotEmpty) return contacts.first.givenName;
-      return null;
-    } catch (_) {
-      return null;
+
+
+  /// Détecte le nom via une détection composite et retourne une DetectedIdentity
+  Future<DetectedIdentity> detect() async {
+    // Try Google Sign-In first
+    var googleName = await getNameFromGoogle();
+    if (googleName != null && googleName.isNotEmpty) {
+      return DetectedIdentity(
+        name: googleName,
+        source: NameSource.google,
+        confidenceScore: 0.95,
+      );
     }
+
+    // Try Contacts
+    var contactName = await getNameFromContacts();
+    if (contactName != null && contactName.isNotEmpty) {
+      return DetectedIdentity(
+        name: contactName,
+        source: NameSource.contact,
+        confidenceScore: 0.85,
+      );
+    }
+
+    // Fallback
+    return DetectedIdentity(
+      name: "User",
+      source: NameSource.fallback,
+      confidenceScore: 0.0,
+    );
   }
 }

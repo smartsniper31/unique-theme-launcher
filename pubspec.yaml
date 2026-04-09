@@ -1,7 +1,7 @@
 name: unique_theme_launcher
 description: >
   Le premier launcher qui te connaît avant que tu ne parles.
-  Un téléphone, une personne, une signature unique : installez et laissez la magie opérer.
+  Un téléphone, une personne
 version: 1.0.0+1
 homepage: https://github.com/smartsniper31/unique-theme-launcher
 repository: https://github.com/smartsniper31/unique-theme-launcher
@@ -31,13 +31,13 @@ dependencies:
   # =========================================================================
   # User Detection & Device Info
   # =========================================================================
-  google_sign_in: ^6.1.0                # Google Account detection
-  contacts_service: ^0.6.3              # Read device contacts
-  telephony: ^0.2.0                     # Read SMS messages
-  device_info_plus: ^9.0.2              # Device info (model, IMEI, brand)
-  battery_plus: ^5.0.1                  # Battery level & status real-time
-  network_info_plus: ^5.0.1             # WiFi & network info
-  android_id: ^0.3.0                    # Android unique device ID
+  flutter_contacts: ^1.1.7              # Contact information
+  google_sign_in: ^6.2.1                 # Google authentication
+  device_info_plus: ^10.1.0              # Device information
+  battery_plus: ^6.0.0                   # Battery level & status real-time
+  network_info_plus: ^5.0.1              # WiFi & network info
+  android_id: ^0.3.0                     # Android unique device ID
+  path: ^1.9.0                           # Path manipulation utilities
 
   # =========================================================================
   # Security & Cryptography

@@ -45,9 +45,9 @@
     },
     {
       "name": "battery_plus",
-      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/battery_plus-5.0.3",
+      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/battery_plus-6.2.3",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.4"
     },
     {
       "name": "battery_plus_platform_interface",
@@ -128,12 +128,6 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "contacts_service",
-      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/contacts_service-0.6.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "convert",
       "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.2",
       "packageUri": "lib/",
@@ -165,9 +159,9 @@
     },
     {
       "name": "device_info_plus",
-      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/device_info_plus-9.1.2",
+      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/device_info_plus-10.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.3"
     },
     {
       "name": "device_info_plus_platform_interface",
@@ -204,6 +198,12 @@
       "rootUri": "file:///C:/Users/frik/Desktop/flutter/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.8"
+    },
+    {
+      "name": "flutter_contacts",
+      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_contacts-1.1.9+2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_lints",
@@ -548,12 +548,6 @@
       "languageVersion": "3.6"
     },
     {
-      "name": "quiver",
-      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/quiver-3.2.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "shelf",
       "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/shelf-1.4.2",
       "packageUri": "lib/",
@@ -612,12 +606,6 @@
       "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/string_scanner-1.4.1",
       "packageUri": "lib/",
       "languageVersion": "3.1"
-    },
-    {
-      "name": "telephony",
-      "rootUri": "file:///C:/Users/frik/AppData/Local/Pub/Cache/hosted/pub.dev/telephony-0.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
     },
     {
       "name": "term_glyph",

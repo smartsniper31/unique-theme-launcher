@@ -9,19 +9,19 @@
       "dependencies": [
         "android_id",
         "battery_plus",
-        "contacts_service",
         "crypto",
         "device_info_plus",
         "flutter",
+        "flutter_contacts",
         "flutter_native_splash",
         "google_sign_in",
         "hive_flutter",
         "json_annotation",
         "network_info_plus",
+        "path",
         "path_provider",
         "permission_handler",
-        "provider",
-        "telephony"
+        "provider"
       ],
       "devDependencies": [
         "build_runner",
@@ -148,6 +148,11 @@
       ]
     },
     {
+      "name": "path",
+      "version": "1.9.1",
+      "dependencies": []
+    },
+    {
       "name": "android_id",
       "version": "0.3.6",
       "dependencies": [
@@ -170,18 +175,19 @@
     },
     {
       "name": "battery_plus",
-      "version": "5.0.3",
+      "version": "6.2.3",
       "dependencies": [
         "battery_plus_platform_interface",
         "flutter",
         "flutter_web_plugins",
         "meta",
-        "upower"
+        "upower",
+        "web"
       ]
     },
     {
       "name": "device_info_plus",
-      "version": "9.1.2",
+      "version": "10.1.2",
       "dependencies": [
         "device_info_plus_platform_interface",
         "ffi",
@@ -189,25 +195,9 @@
         "flutter",
         "flutter_web_plugins",
         "meta",
+        "web",
         "win32",
         "win32_registry"
-      ]
-    },
-    {
-      "name": "telephony",
-      "version": "0.2.0",
-      "dependencies": [
-        "flutter",
-        "platform"
-      ]
-    },
-    {
-      "name": "contacts_service",
-      "version": "0.6.3",
-      "dependencies": [
-        "collection",
-        "flutter",
-        "quiver"
       ]
     },
     {
@@ -219,6 +209,13 @@
         "google_sign_in_ios",
         "google_sign_in_platform_interface",
         "google_sign_in_web"
+      ]
+    },
+    {
+      "name": "flutter_contacts",
+      "version": "1.1.9+2",
+      "dependencies": [
+        "flutter"
       ]
     },
     {
@@ -311,11 +308,6 @@
       "dependencies": [
         "collection"
       ]
-    },
-    {
-      "name": "path",
-      "version": "1.9.1",
-      "dependencies": []
     },
     {
       "name": "meta",
@@ -758,6 +750,11 @@
       ]
     },
     {
+      "name": "web",
+      "version": "1.1.1",
+      "dependencies": []
+    },
+    {
       "name": "upower",
       "version": "0.7.0",
       "dependencies": [
@@ -796,18 +793,6 @@
         "flutter",
         "meta",
         "plugin_platform_interface"
-      ]
-    },
-    {
-      "name": "platform",
-      "version": "3.1.6",
-      "dependencies": []
-    },
-    {
-      "name": "quiver",
-      "version": "3.2.2",
-      "dependencies": [
-        "matcher"
       ]
     },
     {
@@ -965,11 +950,6 @@
       ]
     },
     {
-      "name": "web",
-      "version": "1.1.1",
-      "dependencies": []
-    },
-    {
       "name": "http_parser",
       "version": "4.1.2",
       "dependencies": [
@@ -1074,6 +1054,11 @@
         "meta",
         "web"
       ]
+    },
+    {
+      "name": "platform",
+      "version": "3.1.6",
+      "dependencies": []
     },
     {
       "name": "xdg_directories",
