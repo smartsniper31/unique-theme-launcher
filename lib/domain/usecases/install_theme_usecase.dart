@@ -84,6 +84,7 @@ class VisualEngine {
   static String _generateColor(String name) {
     final hash = name.hashCode;
     final color = Color((hash & 0xFFFFFF) + 0xFF000000);
-    return '#${color.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
+    // ignore: deprecated_member_use
+    return '#${color.value.toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
   }
 }

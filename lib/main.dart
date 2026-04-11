@@ -18,14 +18,26 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  debugPrint('═' * 60);
+  debugPrint('🚀 [MAIN] Startup unique_theme_launcher...');
+  debugPrint('═' * 60);
+
   final storage = UserStorage();
   await storage.init();
+  debugPrint('✅ [MAIN] Storage initié');
 
   try {
     if (!(await storage.exists())) {
+      debugPrint('📱 [MAIN] Première installation détectée');
+      debugPrint('📋 [MAIN] Demande des permissions...');
+      
       final results = await PermissionsHelper.requestAllWithRetry();
+      final hasPermissions = PermissionsHelper.hasEssentialPermissions(results);
 
-      if (PermissionsHelper.hasEssentialPermissions(results)) {
+      if (hasPermissions) {
+        debugPrint('✅ [MAIN] Permissions essentielles accordées');
+        debugPrint('🔧 [MAIN] Lancement InstallThemeUseCase...');
+        
         final installer = InstallThemeUseCase(
           nameDetector: NameDetector(),
           deviceDetector: DeviceDetector(),
@@ -34,19 +46,28 @@ void main() async {
           storage: storage,
         );
         await installer.execute();
+        debugPrint('✅ [MAIN] Installation complétée');
+      } else {
+        debugPrint('⚠️  [MAIN] Permissions insuffisantes - utilisation fallback');
       }
+    } else {
+      debugPrint('✅ [MAIN] Profil existant trouvé');
     }
   } catch (e) {
-    debugPrint("Erreur lors de l'installation : $e");
+    debugPrint('❌ [MAIN] Erreur lors de l\'installation : $e');
   }
 
   UserProfile? profile = await storage.loadProfile();
 
   if (profile == null) {
-    debugPrint("ERREUR CRITIQUE : Impossible de charger le profil");
+    debugPrint('❌ [MAIN] ERREUR CRITIQUE : Impossible de charger le profil');
     profile = UserProfile.fallback();
     await storage.saveProfile(profile);
   }
+
+  debugPrint('✅ [MAIN] Profil chargé: ${profile.identity.name}');
+  debugPrint('═' * 60);
+  debugPrint('🎨 [MAIN] Lancement UI...');
 
   FlutterNativeSplash.remove();
 
