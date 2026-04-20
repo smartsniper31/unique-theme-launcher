@@ -35,7 +35,7 @@ dependencies:
   google_sign_in: ^6.2.1                 # Google authentication
   device_info_plus: ^10.1.0              # Device information
   battery_plus: ^6.0.0                   # Battery level & status real-time
-  network_info_plus: ^5.0.1              # WiFi & network info
+  network_info_plus: ^7.0.0              # WiFi & network info
   android_id: ^0.3.0                     # Android unique device ID
   path: ^1.9.0                           # Path manipulation utilities
 
